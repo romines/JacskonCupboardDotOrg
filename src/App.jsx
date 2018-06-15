@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Headroom from 'react-headroom';
 import Waypoint from 'react-waypoint';
 import axios from 'axios';
-import Loading from './Loading.jsx'
+import Loading from './components/Loading.jsx'
+import Navigation from './components/Navigation.jsx'
 import './App.css';
 
 
@@ -29,15 +30,9 @@ class App extends Component {
   }
 
   render() {
-    const navLinks = this.state.pageData.filter(page => page.id !== 2).map((data) => {
-      return (
-        <li className={`link ${data.id === this.state.activePage ? 'active' : ''}`} key={data.id}>
-          { data.title.rendered }
-        </li>
-      );
-    });
+    const filteredPages = this.state.pageData.filter(page => page.id !== 2)
 
-    const pages = this.state.pageData.filter(page => page.id !== 2).map((data) => {
+    const pages = filteredPages.map((data) => {
       return (
         <div className="page" key={data.id}>
           <Waypoint
@@ -58,11 +53,10 @@ class App extends Component {
         <div className="App">
           <div className="loaded">
             <Headroom>
-              <div className="nav-container">
-                <ul className="link-list">
-                  { navLinks }
-                </ul>
-              </div>
+              <Navigation
+                activePage={this.state.activePage}
+                pages={filteredPages}
+              />
             </Headroom>
             { pages }
           </div>
