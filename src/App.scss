@@ -1,0 +1,17 @@
+.nav-container {
+  background-color: grey;
+  .link-list .link {
+    display: inline;
+    padding: .6em;
+    &:not(:last-child) {
+      margin-right: .2em;
+    }
+    &.active {
+      background-color: aqua;
+    }
+  }
+}
+
+.page {
+  min-height: calc(100vh - 20px);
+}
